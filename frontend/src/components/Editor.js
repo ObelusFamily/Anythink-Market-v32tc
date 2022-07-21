@@ -30,12 +30,12 @@ class Editor extends React.Component {
     super();
 
     const updateFieldEvent = (key) => (ev) => {
-      if (key === "image" && ev.target.value === ""){
+      if (key === "image" && ev.target.value === "") {
         return this.props.onUpdateField(key, "/placeholder.png");
       }
       return this.props.onUpdateField(key, ev.target.value);
-    }
-      
+    };
+
     this.changeTitle = updateFieldEvent("title");
     this.changeDescription = updateFieldEvent("description");
     this.changeImage = updateFieldEvent("image");
@@ -92,7 +92,7 @@ class Editor extends React.Component {
   }
 
   render() {
-    console.log("props here", this.props)
+    console.log("props here", this.props);
     return (
       <div className="editor-page">
         <div className="container page">
