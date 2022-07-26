@@ -70,7 +70,7 @@ async def create_new_item(
         )
 
     # In case the user did not supplied image url use a placeholder
-    if item_create.image == '':
+    if item_create.image in [None, '']:
         item_create.image = "/placeholder.png"
 
     item = await items_repo.create_item(
