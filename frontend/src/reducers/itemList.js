@@ -84,6 +84,7 @@ const reducer = (state = {}, action) => {
     case NEW_TITLE_FILTER:
       return {
         ...state,
+        title: action.title,
         items: action.payload.items,
         itemsCount: action.payload.itemsCount,
         currentPage: 0,
