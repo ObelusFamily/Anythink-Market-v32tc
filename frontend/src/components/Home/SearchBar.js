@@ -14,7 +14,7 @@ const SearchBar = (props) => {
   let [title, setTitle] = useState("");
 
   const onTitleChange = (event) => {
-    let newTitle = event.target.value
+    let newTitle = event.target.value;
     event.preventDefault();
     setTitle(newTitle);
     props.onSearchTitle(
