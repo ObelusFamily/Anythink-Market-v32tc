@@ -23,13 +23,13 @@ const SearchBar = (props) => {
       agent.Items.byTitle(newTitle)
     );
   };
-  if (!props.show){
-    return ''
+  if (!props.show) {
+    return "";
   }
 
   return (
     <span>
-        &nbsp;
+      &nbsp;
       <input
         id="search-box"
         className="search-by-title form-control-lg"
