@@ -58,11 +58,13 @@ const TagFilterTab = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  ...state.itemList,
-  tags: state.home.tags,
-  token: state.common.token,
-});
+const mapStateToProps = (state) => {
+  return {
+    ...state.itemList,
+    tags: state.home.tags,
+    token: state.common.token,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (tab, pager, payload) =>
