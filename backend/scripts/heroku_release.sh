@@ -14,5 +14,3 @@ alembic upgrade head
 printf "\n⏳${YELLOW}   [Release Phase]: Seeding.${NO_COLOR}\n"
 ./seeds.sh
 printf "\n🎉${GREEN}   [Release Phase]: Database is up to date.${NO_COLOR}\n"
-
-NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program 
