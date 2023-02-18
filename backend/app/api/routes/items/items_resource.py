@@ -1,3 +1,7 @@
+import sys
+import os
+import openai
+
 from typing import Optional
 
 from fastapi import APIRouter, Body, Depends, HTTPException, Response
@@ -24,6 +28,8 @@ from app.models.schemas.items import (
 from app.resources import strings
 from app.services.items import check_item_exists, get_slug_for_item
 from app.services.event import send_event
+# from app.core.config import get_app_settings
+# from app.core.settings.app import AppSettings
 
 router = APIRouter()
 
@@ -60,8 +66,19 @@ async def list_items(
 async def create_new_item(
     item_create: ItemInCreate = Body(..., embed=True, alias="item"),
     user: User = Depends(get_current_user_authorizer()),
-    items_repo: ItemsRepository = Depends(get_repository(ItemsRepository)),
+    items_repo: ItemsRepository = Depends(get_repository(ItemsRepository))
 ) -> ItemInResponse:
+    # print(f"image: {item_create.image}, equality to empty string: {item_create.image == ''}", file=sys.stderr)
+    # print(f"settings: {settings}, app_env: {settings.json()}", file=sys.stderr)
+    if item_create.image == "":
+        openai.api_key = os.environ["OPENAI_API_KEY"]
+        response = openai.Image.create(
+          prompt=item_create.title,
+          n=1,
+          size="256x256"
+          )
+        item_create.image = response['data'][0]['url']
+
     slug = get_slug_for_item(item_create.title)
     if await check_item_exists(items_repo, slug):
         raise HTTPException(

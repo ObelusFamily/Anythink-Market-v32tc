@@ -21,13 +21,14 @@ services:
       - DEBUG=True
       - DATABASE_URL=postgresql://postgres:@postgres-python:5432/anythink-market
       - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
+    env_file: ./backend/.env
     depends_on:
       - "postgres-python"
 
   anythink-frontend-react:
     build: ./frontend
     container_name: anythink-frontend-react
-    command: sh -c "cd frontend && yarn install && /wait-for-it.sh anythink-backend-python:3000 -t 120 --strict -- curl --head -X GET --retry 30 --retry-connrefused --retry-delay 1 anythink-backend-python:3000/api/ping && yarn start"
+    command: sh -c "cd frontend && yarn install && yarn start"
     environment:
       - NODE_ENV=development
       - PORT=3001
